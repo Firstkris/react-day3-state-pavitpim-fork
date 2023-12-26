@@ -1,24 +1,23 @@
-// จงสร้าง checkbox ขึ้นมา 3 อัน ให้แต่ละอันมี name คือ phone Brand
-// เมื่อผู้ใช้ tick หรือ untick checkbox ให้ console.log
-// - ค่า name ของ checkbox
-// - ค่า value ของ checkbox
-// - checkbox นั้นถูก tick หรือ untick
+// จงสร้างลิงค์ <a> มีข้อความว่า “Google”
+// เมื่อผู้ใช้ click link ให้ขึ้นคำถามว่า “Leave for https://google.com?”
+// ถ้าผู้ใช้กด OK ให้ redirect ไปที่ https://google.com
+// ถ้าผู้ใช้กด Cancel ให้ยกเลิก redirect ไปที่ https://google.com
 
 function App() {
-  const handleChange = (event) => {
-    console.log('name', event.target.name);
-    console.log('value', event.target.value);
-    console.log('tik', event.target.checked);
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log('Clicked');
+    let userAnswer = window.confirm(`Leave for https://google.com?`);
+    console.log(userAnswer);
+    if (userAnswer === true) {
+      window.location.replace('https://google.com');
+    }
   };
 
   return (
-    <>
-      <label>Phone</label>
-      <input type='checkbox' name='phone' onChange={handleChange} />
-
-      <label>Brand</label>
-      <input type='checkbox' name='brand' onChange={handleChange} />
-    </>
+    <a href='#' onClick={handleClick}>
+      Google
+    </a>
   );
 }
 
