@@ -1,22 +1,24 @@
-// Lab2
-// จงสร้าง tag <select> ซึ่งมีข้อมูลชื่อประเทศในรายการให้เลือก (ให้ลองใส่มา 5 ประเทศ)
-// เมื่อผู้ใช้เลือกประเทศ ให้ console.log ค่าประเทศที่ถูกเลือก
+// จงสร้าง checkbox ขึ้นมา 3 อัน ให้แต่ละอันมี name คือ phone Brand
+// เมื่อผู้ใช้ tick หรือ untick checkbox ให้ console.log
+// - ค่า name ของ checkbox
+// - ค่า value ของ checkbox
+// - checkbox นั้นถูก tick หรือ untick
 
 function App() {
-  // write your code
   const handleChange = (event) => {
-    console.log(event.target.value);
+    console.log('name', event.target.name);
+    console.log('value', event.target.value);
+    console.log('tik', event.target.checked);
   };
 
   return (
-    <select onChange={handleChange}>
-      <option disabled>select country</option>
-      <option value='TH'>thailand</option>
-      <option value='SG'>singapore</option>
-      <option value='LAO'>laos</option>
-      <option value='MM'>myanmar</option>
-      <option value='CN'>china</option>
-    </select>
+    <>
+      <label>Phone</label>
+      <input type='checkbox' name='phone' onChange={handleChange} />
+
+      <label>Brand</label>
+      <input type='checkbox' name='brand' onChange={handleChange} />
+    </>
   );
 }
 
