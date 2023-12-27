@@ -2,13 +2,28 @@ import React from 'react';
 // Uncontrolled
 // Controlled
 
+// เขียนโค้ดให้ทำงานได้ => เข้าใจ syntax และการทำงานของโค้ด
+// เขียนโค้ดให้ดี => วิธีการจัดเก็บข้อมูล (DataStructure == โครงสร้าง)
+// State String => Primitive
+// State => Collection (Object,Array,Map,Set) => เลือกใช้ Object
+/*
+1 field = 1 Obj = {
+	content : "",
+	error: "",
+	color: ""
+}
+*/
+const DEFAULT = {
+  content: '',
+  error: '',
+  color: 'black',
+};
+
 function App() {
   // State Controlled
 
   // UserName
-  const [username, setUserName] = React.useState('');
-  const [errorUserName, setErrorUserName] = React.useState('');
-  const [usernameColor, setUserNameColor] = React.useState('black');
+  const [username, setUserName] = React.useState(DEFAULT);
 
   // Email
   const [email, setEmail] = React.useState('');
@@ -33,15 +48,30 @@ function App() {
     // Validate Form
 
     // requirement : ไม่ต่ำกว่า 8 ตัวอักษร และ ไม่ซ้ำกับคนอื่น
-    if (username.length < 8) {
-      // alert('ชื่อผู้ใช้งานต้องมากกว่า 8 ตัวอักษร');
-      setErrorUserName('ชื่อผู้ใช้งานต้องมากกว่า 8 ตัวอักษร');
-      // errorUserName == 'ชื่อผู้ใช้งานต้องมากกว่า 8 ตัวอักษร'
-      setUserNameColor('red');
+    if (username.content.length < 8) {
+      // let newState = Object.assign({}, username, {
+      //   error: 'ชื่อผู้ใช้งานต้องมากกว่า 8 ตัวอักษร',
+      //   color: 'red',
+      // });
+      // setUserName(newState);
+
+      setUserName((cur) => ({
+        ...cur,
+        color: 'red',
+        error: 'ชื่อผู้ใช้งานต้องมากกว่า 8 ตัวอักษร',
+      }));
     } else {
-      setUserNameColor('green');
-      setErrorUserName('');
-      // errorUserName == ""
+      // let newState = Object.assign({}, username, {
+      //   error: '',
+      //   color: 'green',
+      // });
+      // setUserName(newState);
+
+      setUserName((cur) => ({
+        ...cur,
+        color: 'green',
+        error: '',
+      }));
     }
 
     // Validate Email
@@ -81,10 +111,11 @@ function App() {
 
   // Handler Function <input>
   const handleUserNameChange = (event) => {
-    // console.log('user typing..', event.target.value);
-    setUserName(event.target.value);
-    setErrorUserName('');
-    setUserNameColor('black');
+    setUserName({
+      content: event.target.value,
+      error: '',
+      color: 'black',
+    });
   };
 
   const handleEmail = (event) => {
@@ -120,19 +151,19 @@ function App() {
           <input
             type='text'
             placeholder='username or account'
-            value={username} // value ที่แสดงผลขึ้นกับกับ React state
+            value={username.content} // value ที่แสดงผลขึ้นกับกับ React state
             onChange={handleUserNameChange}
             style={{
-              borderColor: usernameColor,
+              borderColor: username.color,
             }}
           />
-          {errorUserName && (
+          {username.error && (
             <p
               style={{
-                color: usernameColor,
+                color: username.color,
               }}
             >
-              {errorUserName}
+              {username.error}
             </p>
           )}
         </div>
