@@ -1,12 +1,18 @@
 import React from 'react';
-import Counter from './Counter';
 
 function App() {
+  const [show, setShow] = React.useState(true);
+
+  // handle FN
+  const toggleShow = () => {
+    setShow(!show);
+  };
+
   return (
     <main className='app'>
-      <Counter />
-      {/* <Counter />
-      <Counter /> */}
+      {/* {show ? <h1>Show</h1> : null} */}
+      {show && <h1>Show</h1>}
+      <button onClick={toggleShow}>click</button>
     </main>
   );
 }
