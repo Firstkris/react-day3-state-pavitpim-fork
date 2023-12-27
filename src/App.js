@@ -6,7 +6,7 @@ function App() {
   // สำหรับ App มองว่า <Form/> เป็น uncontrolled Component
   // return <Form />;
 
-  let disabled = false;
+  let disabled = true;
 
   // props.onSubmit('12345');
   const onSubmit = (a) => {
@@ -21,12 +21,12 @@ function App() {
   return (
     <>
       <h1>Submit : {submittedTimes} </h1>
-      <Form 
-				disabled={disabled} 
-				onSubmit={onSubmit} 
-				onAdd={add} 
-				increaseSubmit={setSubmittedTimes}
-				/>
+      <Form
+        disabled={disabled}
+        onSubmit={onSubmit}
+        onAdd={add}
+        increaseSubmit={setSubmittedTimes}
+      />
     </>
   );
 }
