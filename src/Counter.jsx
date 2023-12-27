@@ -18,17 +18,20 @@ function Counter() {
   };
 
   const increaseByThree = () => {
-    // console.log('clicked');
-    // setCount(count + 3);
+    // วิธีใช้งาน setState
+    // 1. setState(newState) ex. setCount(10),setCount(count+3)
+    // 2. setState(fn -> newState)
 
-    setCount(count + 1); // ช้าก่อนโยม (Async รับรู้คำสั่ง ไม่ทำทันที)
-    console.log('1'); // Sync : ทำทันที
-    setCount(count + 1); // Async รับรู้คำสั่ง ไม่ทำทันที
-    console.log('2'); // Sync : ทำทันที
-    setCount(count + 1); // Async รับรู้คำสั่ง ไม่ทำทันที
+    // setCount(count + 1); // 0 -> 1
+    // setCount(count + 1); // 0 -> 1
+    // setCount(count + 1); // 0 -> 1
+
+    setCount((currentState) => currentState + 1); // 0->1
+    console.log(count); // 0
+    setCount((currentState) => currentState + 1); // 1->2
+    setCount((currentState) => currentState + 1); // 2->3
   };
-  // React จะอัพเดท State ให้เมื่อ All Event Handler FN จบการทำงาน
-  //  Batching Update State (ทำการอัพเดทเป็นรอบๆ ลดการ Rerender)
+
   return (
     <>
       <h1>count : {count}</h1>
