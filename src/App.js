@@ -4,13 +4,29 @@ import React from 'react';
 
 function App() {
   // State Controlled
+
+  // UserName
   const [username, setUserName] = React.useState('');
   const [errorUserName, setErrorUserName] = React.useState('');
   const [usernameColor, setUserNameColor] = React.useState('black');
 
+  // Email
   const [email, setEmail] = React.useState('');
   const [emailColor, setEmailColor] = React.useState('black');
   const [emailError, setEmailError] = React.useState('');
+
+  // Password State
+  const [password, setPassword] = React.useState('');
+  const [errorPassword, setErrorPassword] = React.useState('');
+  const [passwordColor, setPasswordColor] = React.useState('black');
+  // ConfirmPassword State
+  const [confirmPassword, setConfirmPassword] = React.useState('');
+  const [errorConfirmPassword, setErrorConfirmPassword] = React.useState('');
+  const [confirmPasswordColor, setConfirmPasswordColor] = React.useState('black');
+
+  // Validation => Matched
+  // Validation => len > 6
+
   // Handler Function <form>
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -39,6 +55,27 @@ function App() {
       setEmailError('');
     }
 
+    if (password !== confirmPassword) {
+      setErrorPassword('รหัสผ่านกับรหัสผ่านยืนยันไม่ตรงกัน');
+      setErrorConfirmPassword('รหัสผ่านกับรหัสผ่านยืนยันไม่ตรงกัน');
+      setPasswordColor('red');
+      setConfirmPasswordColor('red');
+    } else {
+      setErrorPassword('');
+      setErrorConfirmPassword('');
+      setPasswordColor('green');
+      setConfirmPasswordColor('green');
+    }
+
+    if (password.length < 6) {
+      setErrorPassword('พาสเวิร์ดสั้นไปไอ้หนู');
+      setPasswordColor('red');
+    }
+    if (confirmPassword.length < 6) {
+      setErrorConfirmPassword('พาสเวิร์ดสั้นไปไอ้หนู');
+      setConfirmPasswordColor('red');
+    }
+
     // ส่งไป BackEnd เพื่อเก็บลง DataBase
   };
 
@@ -56,6 +93,20 @@ function App() {
     setEmailError('');
   };
 
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+    setErrorPassword('');
+    setErrorConfirmPassword('');
+    setPasswordColor('black');
+    setConfirmPasswordColor('black');
+  };
+  const handleConfirmPassword = (event) => {
+    setConfirmPassword(event.target.value);
+    setErrorPassword('');
+    setErrorConfirmPassword('');
+    setPasswordColor('black');
+    setConfirmPasswordColor('black');
+  };
   // การ setState ใน FN Component จะทำให้ Infinite Loop
   // ต้อง set ใน Event Handler
   // setUserName((p) => p + '5');
@@ -103,6 +154,34 @@ function App() {
             >
               {emailError}
             </p>
+          )}
+        </div>
+
+        <div className='form-input'>
+          <label>password</label>
+          <input
+            type='password'
+            value={password}
+            onChange={handlePassword}
+            style={{
+              borderColor: passwordColor,
+            }}
+          />
+          {errorPassword && <p style={{ color: passwordColor }}>{errorPassword}</p>}
+        </div>
+
+        <div className='form-input'>
+          <label>confirm password</label>
+          <input
+            type='password'
+            value={confirmPassword}
+            onChange={handleConfirmPassword}
+            style={{
+              borderColor: confirmPasswordColor,
+            }}
+          />
+          {errorConfirmPassword && (
+            <p style={{ color: confirmPasswordColor }}>{errorConfirmPassword}</p>
           )}
         </div>
 
