@@ -7,10 +7,15 @@ function App() {
   const [username, setUserName] = React.useState('');
   const [errorUserName, setErrorUserName] = React.useState('');
   const [usernameColor, setUserNameColor] = React.useState('black');
+
+  const [email, setEmail] = React.useState('');
+  const [emailColor, setEmailColor] = React.useState('black');
+  const [emailError, setEmailError] = React.useState('');
   // Handler Function <form>
   const handleSubmit = (event) => {
     event.preventDefault();
     // Validate Form
+
     // requirement : ไม่ต่ำกว่า 8 ตัวอักษร และ ไม่ซ้ำกับคนอื่น
     if (username.length < 8) {
       // alert('ชื่อผู้ใช้งานต้องมากกว่า 8 ตัวอักษร');
@@ -22,6 +27,18 @@ function App() {
       setErrorUserName('');
       // errorUserName == ""
     }
+
+    // Validate Email
+    if (!email.includes('@')) {
+      // alert('Invalid Email');
+      setEmailColor('red');
+      setEmailError('รูปแบบอีเมลล์ไม่ถูกต้อง');
+    } else {
+      // alert('valid Email');
+      setEmailColor('green');
+      setEmailError('');
+    }
+
     // ส่งไป BackEnd เพื่อเก็บลง DataBase
   };
 
@@ -31,6 +48,12 @@ function App() {
     setUserName(event.target.value);
     setErrorUserName('');
     setUserNameColor('black');
+  };
+
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+    setEmailColor('black');
+    setEmailError('');
   };
 
   // การ setState ใน FN Component จะทำให้ Infinite Loop
@@ -63,10 +86,54 @@ function App() {
           )}
         </div>
 
+        <div className='form-input'>
+          <label>email</label>
+          <input
+            value={email}
+            onChange={handleEmail}
+            style={{
+              borderColor: emailColor,
+            }}
+          />
+          {emailError && (
+            <p
+              style={{
+                color: emailColor,
+              }}
+            >
+              {emailError}
+            </p>
+          )}
+        </div>
+
         <button type='submit'>Register</button>
       </form>
     </>
   );
 }
+// TASK-1 : Collect Data จาก User
+// 1. เพิ่ม UI
+// 2. ผูก State เข้ากับ Tag Input : value={state}
+// 3. ผูก event เข้ากับ fn ที่อัพเดท State ได้
 
+// TASK-2 : Validate Email
+// เช็คว่ามี @ ไหม ทำตอน Submit
+
+// TASK-3 : FeedBack UI
+/*
+Happy CASE : Validate ผ่าน
+- border เป็นสีเขียว
+- ไม่แสดงข้อความ : ""
+
+Unhappy CASE : Validate ไม่ผ่าน 
+- border เป็นสีแดง
+- ข้อความแสดง error : "รูปแบบอีเมลล์ไม่ถูกต้อง"
+
+Default CASE : 
+- border เป็นสีดำ -> Change
+- ไม่แสดงข้อความ : ""
+
+// ปัญหาแสดงข้อความ
+State  "" <-> "รูปแบบ email ไม่ถูกต้อง"
+*/
 export default App;
