@@ -5,9 +5,9 @@ import ListContent from './components/list/ListContent';
 function App() {
   return (
     <div>
-      <ListContent name='todo' />
-      <ListContent name='book' />
-      <ListContent name='shopping' />
+      <ListContent name='backlog' />
+      <ListContent name='inprogress' />
+      <ListContent name='done' />
     </div>
   );
 }

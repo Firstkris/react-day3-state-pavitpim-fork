@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../ui/Button';
 
 // item = {id:string, data:string}
 export default function ListItem(props) {
@@ -22,14 +23,18 @@ export default function ListItem(props) {
   };
 
   return (
-    <li>
-      {isEdit ? <input value={data} onChange={handleEditData} /> : <span>{data}</span>}
+    <li className='item__container'>
       {isEdit ? (
-        <button onClick={handleSaveItem}>save</button>
+        <input className='item' value={data} onChange={handleEditData} />
       ) : (
-        <button onClick={handleToggleEdit}>edit</button>
+        <span className='item'>{data}</span>
       )}
-      <button onClick={(e) => props.onDelete(props.item.id)}>x</button>
+      {isEdit ? (
+        <Button onClick={handleSaveItem}>save</Button>
+      ) : (
+        <Button onClick={handleToggleEdit}>edit</Button>
+      )}
+      <Button onClick={(e) => props.onDelete(props.item.id)}>x</Button>
     </li>
   );
 }

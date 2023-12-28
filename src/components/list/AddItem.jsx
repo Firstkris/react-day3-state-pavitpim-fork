@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../ui/Button';
 
 function AddItem(props) {
   const [item, setItem] = React.useState('');
@@ -14,7 +15,7 @@ function AddItem(props) {
   return (
     <>
       <input value={item} onChange={handleChangeItem} />
-      <button onClick={handleAddItem}>add</button>
+      <Button onClick={handleAddItem}>add</Button>
     </>
   );
 }

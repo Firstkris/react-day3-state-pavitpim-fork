@@ -16,3 +16,29 @@ li {
 .done {
   text-decoration: line-through;
 }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
+  min-width: 80px;
+  background: wheat;
+  border: none;
+  padding: 3px;
+  cursor: pointer;
+  border: 1px solid black;
+  margin: 0 3px;
+  border-radius: 4px;
+}
+.item__container {
+  display: flex;
+}
+
+.item {
+  /* background: grey; */
+  padding: 10px 20px;
+  width: 100%;
+  border: 1px solid black;
+}
