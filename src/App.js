@@ -19,7 +19,16 @@ function App() {
     setNewTodo('');
   };
 
-  const todoRender = todoList.map((todo, index) => <li key={index}>{todo}</li>);
+  // 3. handle delete
+  const handleDeleteTodo = (event) => {
+    console.log('delete todo');
+  };
+
+  const todoRender = todoList.map((todo, index) => (
+    <li key={index}>
+      {todo} <button onClick={handleDeleteTodo}>x</button>
+    </li>
+  ));
   return (
     <div>
       <h1>My Todo</h1>
@@ -39,3 +48,7 @@ export default App;
 // map : input.map(instruction) ==> สร้าง output
 
 // Array เป็น Reference
+
+// เพิ่ม Feature
+// มี UI แสดงผล/รับ UserInput
+// มี handleFunction
