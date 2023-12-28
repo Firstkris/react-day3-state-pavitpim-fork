@@ -20,13 +20,29 @@ function App() {
   };
 
   // 3. handle delete
-  const handleDeleteTodo = (event) => {
-    console.log('delete todo');
+  const handleDeleteTodo = (idx) => {
+    console.log('delete todo', idx);
+    /*
+      1. เอาสมาชิกที่ index นั้นออก
+      2. 
+        - clone array เก่า
+        - ลบสมาชิกที่ index นั้นออกจาก array ใหม่
+        - นำ array ใหม่ไป set เป็น stateใหม่
+    */
+
+    // update state แบบ ยัดค่า
+    // const newTodoList = [...todoList];
+    // newTodoList.splice(idx, 1);
+    // setTodoList(newTodoList);
+
+    // update state แบบ callback
+    setTodoList((curr) => curr.filter((todo, index) => index !== idx));
   };
 
   const todoRender = todoList.map((todo, index) => (
     <li key={index}>
-      {todo} <button onClick={handleDeleteTodo}>x</button>
+      {todo}
+      <button onClick={(e) => handleDeleteTodo(index)}>x</button>
     </li>
   ));
   return (
