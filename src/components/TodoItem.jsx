@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function TodoItem(props) {
   const [isEdit, setIsEdit] = React.useState(false);
-  const [todo, setTodo] = React.useState(props.todo || '');
+  const [todo, setTodo] = React.useState(props.todo.task || '');
 
   // 1. handle Toggle Edit <-> Show
   const handleToggleEdit = () => {
@@ -28,7 +28,7 @@ export default function TodoItem(props) {
       ) : (
         <button onClick={handleToggleEdit}>edit</button>
       )}
-      <button onClick={(e) => props.onDelete(props.index)}>x</button>
+      <button onClick={(e) => props.onDelete(props.todo.id)}>x</button>
     </li>
   );
 }
