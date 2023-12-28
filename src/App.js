@@ -1,8 +1,23 @@
+// NodeModules
 import React from 'react';
+import { nanoid } from 'nanoid';
+
+// Src
 import TodoItem from './components/TodoItem';
 
+// todoList = Array<string> => มีข้อมูลให้ใช้แค่  index,string
+// todoLists = Array<object_todo> => มีข้อมูลให้ใช้ index, ของใน Object
+/* 
+TODO_SCHEMAS
+todo_object = {
+  id:string,
+  task:string,
+  done:boolean,
+  due_date?: string "YYYY-MM-DD"
+}
+*/
 function App() {
-  const [todoList, setTodoList] = React.useState(['HW', 'Hangout']);
+  const [todoList, setTodoList] = React.useState([]);
   const [newTodo, setNewTodo] = React.useState('');
 
   // handle Fn
@@ -13,7 +28,13 @@ function App() {
 
   // 2.handle add (การสร้าง todo ใหม่) -> <button>
   const handleAddNewTodo = () => {
-    setTodoList((currentTodoList) => [...currentTodoList, newTodo]);
+    let newTodoObj = {
+      id: nanoid(),
+      task: newTodo,
+      done: false,
+    };
+
+    setTodoList((currentTodoList) => [...currentTodoList, newTodoObj]);
     setNewTodo('');
   };
 
@@ -29,11 +50,11 @@ function App() {
     setTodoList(newTodoList);
   };
 
-  const todoRender = todoList.map((todo, index) => (
+  const todoRender = todoList.map((todoObj, index) => (
     <TodoItem
-      key={index}
+      key={todoObj.id}
       index={index}
-      todo={todo}
+      todo={todoObj.task}
       onDelete={handleDeleteTodo}
       onEdit={handleEditTodo}
     />

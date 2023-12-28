@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function TodoItem(props) {
-  console.log(props);
   const [isEdit, setIsEdit] = React.useState(false);
   const [todo, setTodo] = React.useState(props.todo || '');
 
