@@ -1,5 +1,30 @@
 import React from 'react';
 
+function TodoItem() {
+  const [isEdit, setIsEdit] = React.useState(false);
+
+  // 1. handle Toggle Edit <-> Show
+  const handleToggleEdit = () => {
+    setIsEdit((p) => !p);
+  };
+
+  return (
+    <li>
+      {isEdit ? <input /> : <span>My-Todo!</span>}
+      <button onClick={handleToggleEdit}>{isEdit ? 'save' : 'edit'}</button>
+      <button>x</button>
+    </li>
+  );
+
+  // return (
+  //   <li key={index}>
+  //   {isEdit ? <input value={todo} /> : <span>{todo}</span>}
+  //   <button onClick={handleToggleEdit}>{isEdit ? 'save' : 'edit'}</button>
+  //   <button onClick={(e) => handleDeleteTodo(index)}>x</button>
+  // </li>
+  // )
+}
+
 // React State ใช้งานนอก FunctionComponent ไม่ได้ ❌
 
 function App() {
@@ -41,18 +66,7 @@ function App() {
     setTodoList((curr) => curr.filter((todo, index) => index !== idx));
   };
 
-  // 4. handle Toggle Edit <-> Show
-  const handleToggleEdit = () => {
-    setIsEdit((p) => !p);
-  };
-
-  const todoRender = todoList.map((todo, index) => (
-    <li key={index}>
-      {isEdit ? <input value={todo} /> : <span>{todo}</span>}
-      <button onClick={handleToggleEdit}>{isEdit ? 'save' : 'edit'}</button>
-      <button onClick={(e) => handleDeleteTodo(index)}>x</button>
-    </li>
-  ));
+  const todoRender = todoList.map((todo, index) => <TodoItem />);
   return (
     <div>
       <h1>My Todo</h1>
