@@ -3,6 +3,8 @@ import React from 'react';
 import { nanoid } from 'nanoid';
 // Src
 import TodoList from './components/TodoList';
+import HeaderList from './components/HeaderList';
+import AddItem from './components/AddItem';
 
 function App() {
   const [todoList, setTodoList] = React.useState([]);
@@ -15,10 +17,10 @@ function App() {
   };
 
   // 2.handle add (การสร้าง todo ใหม่) -> <button>
-  const handleAddNewTodo = () => {
+  const handleAddNewTodo = (newTask) => {
     let newTodoObj = {
       id: nanoid(),
-      task: newTodo,
+      task: newTask,
       done: false,
     };
 
@@ -44,16 +46,10 @@ function App() {
 
   return (
     <div>
-      <h1>My Todo</h1>
-      <input value={newTodo} onChange={handleChangeInput} />
-      <button onClick={handleAddNewTodo}>add</button>
-      {/* Start */}
-      <TodoList  
-        todoList={todoList}
-        onDelete={handleDeleteTodo}
-        onEdit={handleEditTodo}
-      />
-      {/* End */}
+      <HeaderList name='My Todo' />
+      <AddItem onAdd={handleAddNewTodo} />
+
+      <TodoList todoList={todoList} onDelete={handleDeleteTodo} onEdit={handleEditTodo} />
     </div>
   );
 }
