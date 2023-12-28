@@ -17,7 +17,7 @@ export default function TodoItem(props) {
   // 3. handle Save
   const handleSaveTodo = () => {
     const updateTodoObj = { ...props.todo, task: todo };
-    props.onEdit(props.id, updateTodoObj);
+    props.onEdit(props.todo.id, updateTodoObj);
     setIsEdit(false);
   };
 
