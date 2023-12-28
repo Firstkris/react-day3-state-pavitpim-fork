@@ -7,6 +7,8 @@ function App() {
   const [todoList, setTodoList] = React.useState(['HW', 'Hangout']);
   const [newTodo, setNewTodo] = React.useState('');
 
+  const [isEdit, setIsEdit] = React.useState(false);
+
   // handle Fn
   // 1.handle การพิมพ์ -> <input/>
   const handleChangeInput = (event) => {
@@ -39,9 +41,15 @@ function App() {
     setTodoList((curr) => curr.filter((todo, index) => index !== idx));
   };
 
+  // 4. handle Toggle Edit <-> Show
+  const handleToggleEdit = () => {
+    setIsEdit((p) => !p);
+  };
+
   const todoRender = todoList.map((todo, index) => (
     <li key={index}>
-      {todo}
+      {isEdit ? <input value={todo} /> : <span>{todo}</span>}
+      <button onClick={handleToggleEdit}>{isEdit ? 'save' : 'edit'}</button>
       <button onClick={(e) => handleDeleteTodo(index)}>x</button>
     </li>
   ));
@@ -65,6 +73,6 @@ export default App;
 
 // Array เป็น Reference
 
-// เพิ่ม Feature
+// #### เพิ่ม Feature
 // มี UI แสดงผล/รับ UserInput
-// มี handleFunction
+// มี handleFunction -> Trigger Update State
