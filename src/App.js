@@ -1,21 +1,9 @@
 // NodeModules
 import React from 'react';
 import { nanoid } from 'nanoid';
-
 // Src
 import TodoItem from './components/TodoItem';
 
-// todoList = Array<string> => มีข้อมูลให้ใช้แค่  index,string
-// todoLists = Array<object_todo> => มีข้อมูลให้ใช้ index, ของใน Object
-/* 
-TODO_SCHEMAS
-todo_object = {
-  id:string,
-  task:string,
-  done:boolean,
-  due_date?: string "YYYY-MM-DD"
-}
-*/
 function App() {
   const [todoList, setTodoList] = React.useState([]);
   const [newTodo, setNewTodo] = React.useState('');
@@ -44,6 +32,7 @@ function App() {
     setTodoList(newTodoList);
   };
 
+  // 4. handle Edit
   const handleEditTodo = (todoId, updateTodoObj) => {
     const foundIndex = todoList.findIndex((todoObj) => todoObj.id === todoId);
     if (foundIndex !== -1) {
@@ -53,13 +42,8 @@ function App() {
     }
   };
 
-  const todoRender = todoList.map((todoObj, index) => (
-    <TodoItem
-      key={todoObj.id}
-      todo={todoObj} // {id:string,task:string,done:boolean}
-      onDelete={handleDeleteTodo}
-      onEdit={handleEditTodo}
-    />
+  const todoRender = todoList.map((todoObj) => (
+    <TodoItem key={todoObj.id} todo={todoObj} onDelete={handleDeleteTodo} onEdit={handleEditTodo} />
   ));
   return (
     <div>
