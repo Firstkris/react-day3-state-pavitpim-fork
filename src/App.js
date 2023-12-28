@@ -40,26 +40,17 @@ function App() {
 
   // 3. handle delete
   const handleDeleteTodo = (id) => {
-    // #1 update State แบบ ยัดค่า (Search and Destroy)
-    // const foundIndex = todoList.findIndex((todoObj) => todoObj.id === id);
-    // if (foundIndex !== -1) {
-    //   const newTodoList = [...todoList];
-    //   newTodoList.splice(foundIndex, 1);
-    //   setTodoList(newTodoList);
-    // }
-
-    // #2 update state แบบยัดค่า (filter)
     const newTodoList = todoList.filter((todoObj) => todoObj.id !== id);
     setTodoList(newTodoList);
-
-    // #3 update state แบบ callback
-    // setTodoList((curr) => curr.filter((todoObj) => todoObj.id !== id));
   };
 
-  const handleEditTodo = (idx, updateValue) => {
-    const newTodoList = [...todoList];
-    newTodoList.splice(idx, 1, updateValue);
-    setTodoList(newTodoList);
+  const handleEditTodo = (todoId, updateTodoObj) => {
+    const foundIndex = todoList.findIndex((todoObj) => todoObj.id === todoId);
+    if (foundIndex !== -1) {
+      const newTodoList = [...todoList];
+      newTodoList[foundIndex] = updateTodoObj;
+      setTodoList(newTodoList);
+    }
   };
 
   const todoRender = todoList.map((todoObj, index) => (
