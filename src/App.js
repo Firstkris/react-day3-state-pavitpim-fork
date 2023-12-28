@@ -2,7 +2,7 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 // Src
-import TodoItem from './components/TodoItem';
+import TodoList from './components/TodoList';
 
 function App() {
   const [todoList, setTodoList] = React.useState([]);
@@ -42,15 +42,18 @@ function App() {
     }
   };
 
-  const todoRender = todoList.map((todoObj) => (
-    <TodoItem key={todoObj.id} todo={todoObj} onDelete={handleDeleteTodo} onEdit={handleEditTodo} />
-  ));
   return (
     <div>
       <h1>My Todo</h1>
       <input value={newTodo} onChange={handleChangeInput} />
       <button onClick={handleAddNewTodo}>add</button>
-      <ul>{todoRender}</ul>
+      {/* Start */}
+      <TodoList  
+        todoList={todoList}
+        onDelete={handleDeleteTodo}
+        onEdit={handleEditTodo}
+      />
+      {/* End */}
     </div>
   );
 }

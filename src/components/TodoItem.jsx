@@ -23,11 +23,7 @@ export default function TodoItem(props) {
 
   return (
     <li>
-      {isEdit ? (
-        <input value={todo} onChange={handleEditTodoText} />
-      ) : (
-        <span className='done'>{todo}</span>
-      )}
+      {isEdit ? <input value={todo} onChange={handleEditTodoText} /> : <span>{todo}</span>}
       {isEdit ? (
         <button onClick={handleSaveTodo}>save</button>
       ) : (
