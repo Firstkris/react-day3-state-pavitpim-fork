@@ -4,7 +4,7 @@ import React from 'react';
 
 function App() {
   // React State ใช้งานภายใน FunctionComponentn เท่่านั้น ✅
-  const [todos, setTodos] = React.useState(['HW', 'Hangout']);
+  const [todoList, setTodoList] = React.useState(['HW', 'Hangout']);
   const [newTodo, setNewTodo] = React.useState('');
 
   // handle Fn
@@ -14,21 +14,12 @@ function App() {
   };
 
   // 2.handle add (การสร้าง todo ใหม่) -> <button>
-  const handleAddNewTodo = (event) => {
-    console.log('add todo');
-    // สร้าง Todo ใหม่  -> เอาข้อความปัจจุบันไปต่อท้าย Array
-
-    // 1. push => ref เดิม react จะไม่รู้ว่า state เปลี่ยน
-    // todos.push('Sleep');
-
-    // 2. clone array เดิมมาก่อน + แก้ไข
-    const newTodos = [...todos, newTodo]; // ["HW","Hangout","Sleep"]
-    setTodos(newTodos);
+  const handleAddNewTodo = () => {
+    setTodoList((currentTodoList) => [...currentTodoList, newTodo]);
     setNewTodo('');
   };
 
-  const todoRender = todos.map((todo, index) => <li key={index}>{todo}</li>);
-  console.log('render / rerender');
+  const todoRender = todoList.map((todo, index) => <li key={index}>{todo}</li>);
   return (
     <div>
       <h1>My Todo</h1>
