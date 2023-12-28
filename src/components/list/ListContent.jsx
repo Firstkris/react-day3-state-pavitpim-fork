@@ -2,14 +2,15 @@ import React from 'react';
 import { nanoid } from 'nanoid';
 import AddItem from './AddItem';
 import Header from './Header';
+import List from './List';
 
 function ListContent(props) {
   const [list, setList] = React.useState([]);
 
-  const handleAddNewItem = (newItem) => {
+  const handleAddNewItem = (newData) => {
     let newItemObj = {
       id: nanoid(),
-      item: newItem,
+      data: newData,
     };
 
     setList((list) => [...list, newItemObj]);
@@ -35,7 +36,11 @@ function ListContent(props) {
     <div>
       <Header name={props.name} />
       <AddItem onAdd={handleAddNewItem} />
-      {/* <List/> */}
+      <List 
+        allList={list}
+        onDelete={handleDeleteItem} 
+        onEdit={handleEditItem} 
+        />
     </div>
   );
 }
