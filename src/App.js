@@ -81,6 +81,8 @@ function App() {
   };
 
   // 4.handle edit
+  // <App/>
+  // <TodoItem/> props.onEdit(5,"HW-JS")
   const handleEditTodo = (idx, updateValue) => {
     /*
       - clone todo ตัวเก่า
