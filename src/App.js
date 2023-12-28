@@ -1,16 +1,28 @@
 import React from 'react';
 
-function TodoItem() {
+// issue-1 : Edit-State เป็น Global กด Edit 1 Todo = Edit ทุก Todo
+// solved : แยก Component เพื่อให้แต่ละ Todo มี isEdit ของตัวเอง
+// - issue-2 : แสดงผลไม่ถูกต้อง => Solved ส่ง Props
+// - issue-3 : พอแก้ไข todo ใน TodoItem , TodoList ใน parent ไม่เปลี่ยน
+
+function TodoItem(props) {
   const [isEdit, setIsEdit] = React.useState(false);
+  const [todo, setTodo] = React.useState(props.todo || '');
 
   // 1. handle Toggle Edit <-> Show
   const handleToggleEdit = () => {
     setIsEdit((p) => !p);
   };
 
+  // 2. handle Edit Text
+  const handleEditTodoText = (event) => {
+    // props.todo = event.target.value; // modified props ❌
+    setTodo(event.target.value);
+  };
+
   return (
     <li>
-      {isEdit ? <input /> : <span>My-Todo!</span>}
+      {isEdit ? <input value={todo} onChange={handleEditTodoText} /> : <span>{todo}</span>}
       <button onClick={handleToggleEdit}>{isEdit ? 'save' : 'edit'}</button>
       <button>x</button>
     </li>
@@ -31,8 +43,6 @@ function App() {
   // React State ใช้งานภายใน FunctionComponentn เท่่านั้น ✅
   const [todoList, setTodoList] = React.useState(['HW', 'Hangout']);
   const [newTodo, setNewTodo] = React.useState('');
-
-  const [isEdit, setIsEdit] = React.useState(false);
 
   // handle Fn
   // 1.handle การพิมพ์ -> <input/>
@@ -66,7 +76,7 @@ function App() {
     setTodoList((curr) => curr.filter((todo, index) => index !== idx));
   };
 
-  const todoRender = todoList.map((todo, index) => <TodoItem />);
+  const todoRender = todoList.map((todo, index) => <TodoItem todo={todo} />);
   return (
     <div>
       <h1>My Todo</h1>
