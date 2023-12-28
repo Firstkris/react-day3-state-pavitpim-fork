@@ -1,14 +1,20 @@
 // NodeModules
 import React from 'react';
-import ListContent from './components/list/ListContent';
+import Modal from './components/ui/Modal';
 
 function App() {
+  // return (
+  //   <Modal>
+  //     <h1>Register</h1>
+  //     <input />
+  //   </Modal>
+  // );
+
   return (
-    <div>
-      <ListContent name='backlog' />
-      <ListContent name='inprogress' />
-      <ListContent name='done' />
-    </div>
+    <Modal>
+      <h1>Login</h1>
+      <input />
+    </Modal>
   );
 }
 
